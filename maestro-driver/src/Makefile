@@ -5,9 +5,9 @@ CXXFLAGS = -g -static -pedantic -W -Wall -Wextra -Wshadow -Wformat \
 	-Wlogical-op -Wmissing-include-dirs -Wconversion \
 	-Wmissing-declarations -Wno-long-long
 
-LDFLAGS = -lrt -lpthread -lboost_thread -lprotobuf -llog4cxx -lboost_program_options -lboost_system
+LDFLAGS = -lrt -lpthread -lboost_thread -lboost_system -lprotobuf -llog4cxx -lboost_program_options
 
-EXECUTABLE = ninedof_driver
+EXECUTABLE = hitec_driver
 
 BINDIR = ../bin/
 
@@ -39,7 +39,7 @@ $(PROTO_CC_FILES): $(PROTO_FILES)
 	$(PROTOC) --cpp_out=. $(PROTOC_FLAGS) $<
 
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
+	echo DOTO && $(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
 %.pb.o: %.pb.cc
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@

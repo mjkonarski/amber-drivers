@@ -7,7 +7,7 @@ CXXFLAGS = -g -static -pedantic -W -Wall -Wextra -Wshadow -Wformat \
 
 LDFLAGS = -lrt -lpthread -lboost_thread -lprotobuf -llog4cxx -lboost_program_options -lboost_system
 
-EXECUTABLE = ninedof_driver
+EXECUTABLE = stargazer_driver
 
 BINDIR = ../bin/
 

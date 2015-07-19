@@ -7,7 +7,7 @@ CXXFLAGS = -g -static -pedantic -W -Wall -Wextra -Wshadow -Wformat \
 
 LDFLAGS = -lrt -lpthread -lboost_thread -lprotobuf -llog4cxx -lboost_program_options -lboost_system
 
-EXECUTABLE = ninedof_driver
+EXECUTABLE = location_driver
 
 BINDIR = ../bin/
 
@@ -33,10 +33,14 @@ $(EXECUTABLE): $(PROTO_OBJ_FILES) $(PROTO_H_FILES) $(OBJS)
 	$(CXX)  $(OBJS) $(AMBER_COMMON_OBJS) $(PROTO_OBJ_FILES) $(LDFLAGS) -o $(BINDIR)$@ 
 
 $(PROTO_H_FILES): $(PROTO_FILES)
-	$(PROTOC) --cpp_out=. $(PROTOC_FLAGS) $<
+	for proto_file in $^ ; do \
+	    $(PROTOC) --cpp_out=. $(PROTOC_FLAGS) $$proto_file ; \
+	done
 
 $(PROTO_CC_FILES): $(PROTO_FILES)
-	$(PROTOC) --cpp_out=. $(PROTOC_FLAGS) $<
+	for proto_file in $^ ; do \
+	    $(PROTOC) --cpp_out=. $(PROTOC_FLAGS) $$proto_file ; \
+	done
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
